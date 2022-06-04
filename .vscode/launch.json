@@ -1,38 +1,38 @@
 
 
 
-{
-    "configurations": [
+// {
+//     "configurations": [
 
-        {
-            "name": "Flutter-All",
-            "preLaunchTask": "Flutter-Launch-All",
-            "request": "launch",
-            "type": "dart",
-        },
-        // {
-        //     "name": "Flutter-iOS",
-        //     "preLaunchTask": "Flutter-Launch-iOS",
-        //     "request": "launch",
-        //     "type": "dart",
-        // },
-        // {
-        //     "name": "Flutter-Android",
-        //     "preLaunchTask": "Flutter-Launch-Android",
-        //     "request": "launch",
-        //     "type": "dart",
-        // },
-        {
-            "name": "Flutter-Web",
-            "preLaunchTask": "Flutter-Launch-Web",
-            "request": "launch",
-            "type": "dart",
-        },
-        {
-            "name": "Flutter-Web",
-            "preLaunchTask": "Flutter-Launch-Web",
-            "request": "launch",
-            "type": "dart",
-        }
-    ],
-}
+//         {
+//             "name": "Flutter-All",
+//             "preLaunchTask": "Flutter-Launch-All",
+//             "request": "launch",
+//             "type": "dart",
+//         },
+//         // {
+//         //     "name": "Flutter-iOS",
+//         //     "preLaunchTask": "Flutter-Launch-iOS",
+//         //     "request": "launch",
+//         //     "type": "dart",
+//         // },
+//         // {
+//         //     "name": "Flutter-Android",
+//         //     "preLaunchTask": "Flutter-Launch-Android",
+//         //     "request": "launch",
+//         //     "type": "dart",
+//         // },
+//         {
+//             "name": "Flutter-Web",
+//             "preLaunchTask": "Flutter-Launch-Web",
+//             "request": "launch",
+//             "type": "dart",
+//         },
+//         {
+//             "name": "Flutter-Web",
+//             "preLaunchTask": "Flutter-Launch-Web",
+//             "request": "launch",
+//             "type": "dart",
+//         }
+//     ],
+// }

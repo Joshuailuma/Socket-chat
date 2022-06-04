@@ -1,5 +1,4 @@
 import 'package:first_app/controller.dart';
-import 'package:first_app/internet.dart';
 import 'package:first_app/model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,6 +37,27 @@ class _SocketChatState extends State<SocketChat> {
     socket.on('message-received', (data) {
       chatController.chatMessages.add(Message.fromJson(data));
     });
+
+    socket.on('welcome-message', (data) {
+      var i = data;
+      chatController.welcomeMessage.value = i;
+    });
+
+//When a user join the chat
+    socket.on('Information', (data) {
+      String? i = data;
+      print(i);
+      //When an event recieved from server, data is added to the stream
+      return streamSocket.addResponse(i!);
+    });
+//HWen a user leaves the chat
+    // socket.on('Information', (data) {
+    //   String? i = data;
+    //   print(i);
+    //   //When an event recieved from server, data is added to the stream
+
+    //   return streamSocket.addResponse(i!);
+    // });
   }
 
   @override
@@ -139,33 +159,47 @@ class _SocketChatState extends State<SocketChat> {
                 ),
               ),
               child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+                child: Column(
+                  children: [
+                    Obx(() => Text(chatController.welcomeMessage.value)),
+                    Expanded(
                         child: SizedBox(
-                          child: Obx(
-                            () => ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: chatController.chatMessages.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                var item = chatController.chatMessages[index];
-                                bool isMe = item.sentByMe == socket.id;
-                                var message = item.message;
-                                var id = socket.id;
-                                print('Message = $message and Id= $id, $isMe');
+                      child: Obx(
+                        () => ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: chatController.chatMessages.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var item = chatController.chatMessages[index];
+                              bool isMe = item.sentByMe == socket.id;
+                              var message = item.message;
+                              var id = socket.id;
+                              print('Message = $message and Id= $id, $isMe');
 
-                                return messageBox(message, isMe);
-                              },
-                            ),
-                          ),
-                        ),
+                              return Column(children: [
+                                StreamBuilder(
+                                    stream: streamSocket.getResponse,
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<String> snapshot) {
+                                      if (snapshot.hasData) {
+                                        print(snapshot.data!);
+                                        return Text(snapshot.data!);
+                                      } else {
+                                        print('No data');
+                                        return Text('');
+                                      }
+                                    }),
+                                messageBox(message, isMe)
+                              ]);
+                            }),
                       ),
-                    ],
-                  )),
+                    )),
+                  ],
+                ),
+              ),
             ),
           ),
           Container(

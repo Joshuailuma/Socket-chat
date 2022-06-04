@@ -1,4 +1,5 @@
 import 'package:first_app/internet.dart';
+import 'package:first_app/rooms/room_list.dart';
 import 'package:first_app/socket_chat.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class _NodeLoginState extends State<NodeLogin> {
         });
 
         Navigator.push(
-            (context), MaterialPageRoute(builder: (builder) => SocketChat()));
+            (context), MaterialPageRoute(builder: (builder) => RoomList()));
       } else {
         print('Internet model probs');
         setState(() {
